@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import classes from './App.module.css';
-import Person from '../components/Persons/Person/Person';
+
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -42,46 +44,20 @@ class App extends Component {
 
   render() {
     let persons = null;
-    let buttonClasses = '';
-
+    
     if (this.state.showPersons) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, idx) => {
-            return (
-              <Person
-                name={person.name}
-                age={person.age}
-                click={this.deletePersonHandler.bind(this, idx)}
-                key={person.id}
-                changed={(event) => this.nameChangedHandler(event, person.id)}
-              />
-            );
-          })}
-        </div>
-      );
-      buttonClasses = classes.Red;
+      persons = <Persons 
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler}/>;
     }
-
-    let parClasses = [];
-
-    if (this.state.persons.length <= 2) {
-      parClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      parClasses.push(classes.bold);
-    }
-
 
     return (
       <div className={classes.App}>
-        <h1>Hi, this is my first react app!!</h1>
-        <p className={parClasses.join(' ')}>
-          {!this.state.persons.length ? 'No person' : this.state.persons.length + (this.state.persons.length > 1 ? ' people': ' person')} on the list!
-        </p>
-        <button className={buttonClasses} onClick={this.togglePersonsHandler}>
-          Toggle Persons
-        </button>
+        <Cockpit 
+          personsLength={this.state.persons.length}
+          showPersons={this.state.showPersons}
+          clicked={this.togglePersonsHandler}/>
         {persons}
       </div>
     );
