@@ -5,6 +5,21 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    console.log('[App] constructor');
+    // this.state = {
+    //   persons: [
+    //     { id: 'id1', name: 'Max', age: 28 },
+    //     { id: 'id2', name: 'Mat', age: 23 },
+    //     { id: 'id3', name: 'Tom', age: 31 },
+    //   ],
+    //   showPersons: false
+    // };
+  }
+
+  //modern way
   state = {
     persons: [
       { id: 'id1', name: 'Max', age: 28 },
@@ -13,6 +28,16 @@ class App extends Component {
     ],
     showPersons: false
   };
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App] getDerivedStateFromProps', props);
+
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App] componentDidMount');
+  }
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex((p) => p.id === id);
@@ -43,6 +68,7 @@ class App extends Component {
   };
 
   render() {
+    console.log('[App] render');
     let persons = null;
 
     if (this.state.showPersons) {

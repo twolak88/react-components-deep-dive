@@ -1,6 +1,7 @@
 import classes from './Person.module.css';
 
 const person = (props) => {
+  console.log('[Person] rendering...');
   return (
     <div className={classes.Person}>
       <p onClick={props.clicked}>
