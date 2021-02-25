@@ -4,28 +4,35 @@ import classes from './Cockpit.module.css';
 const Cockpit = (props) => {
 
   useEffect(() => {
-    console.log('[Cockpit] useEffect');
+    console.log('[Cockpit] useEffect1');
     //Http request
     setTimeout(() => {
       console.log('First time rendered!');
     }, 1000);
+    return () => {
+      console.log('[Cockpit] useEffect => cleanup work');
+    }
   }, []);
 
   useEffect(() => {
-    console.log('[Cockpit] useEffect');
-    //Http request
+    console.log('[Cockpit] useEffect2');
     setTimeout(() => {
       console.log('Persons changed!');
     }, 1000);
+    return () => {
+      console.log('[Cockpit] useEffect => 2 cleanup work');
+    }
   }, [props.persons]);
 
   useEffect(() => {
-    console.log('[Cockpit] useEffect');
-    //Http request
+    console.log('[Cockpit] useEffect3');
     setTimeout(() => {
       console.log('Persons length changed!');
     }, 1000);
-  }, [props.persons.length]);
+    return () => {
+      console.log('[Cockpit] useEffect => 3 cleanup work');
+    }
+  });
 
   //useEffect();
 
