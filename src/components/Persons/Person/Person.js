@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux'; //built-in React.Fragment can be used instead
 import withClass from '../../../hoc/withClass';
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context';
 
 class Person extends Component {
 
@@ -20,17 +21,27 @@ class Person extends Component {
     console.log('[Person] rendering...');
     return (
       <Aux>
+        <AuthContext.Consumer>
+          {(context) => 
+            context.authenticated ? (
+              <p>Authenticated!</p>
+            ) : (
+              <p>Please log in</p>
+            )
+          }
+        </AuthContext.Consumer>
         <p key="i1" onClick={this.props.clicked}>
           He is {this.props.name} and he is {this.props.age}!
         </p>
         <p key="i2">{this.props.children}</p>
-        <input 
-          key="i3" 
+        <input
+          key="i3"
           // ref={(inputEl) => {this.inputElement = inputEl;}}
           ref={this.inputElementRef}
-          type="text" 
-          onChange={this.props.changed} 
-          value={this.props.name} />
+          type="text"
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
       </Aux>
     );
   }
