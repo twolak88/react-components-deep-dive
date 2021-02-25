@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
@@ -22,7 +22,7 @@ const Cockpit = (props) => {
     return () => {
       console.log('[Cockpit] useEffect => 2 cleanup work');
     }
-  }, [props.persons]);
+  }, [props.personsLength]);
 
   useEffect(() => {
     console.log('[Cockpit] useEffect3');
@@ -51,10 +51,10 @@ const Cockpit = (props) => {
   let parClasses = [];
   let buttonClass = '';
 
-  if (props.persons.length <= 2) {
+  if (props.personsLength <= 2) {
     parClasses.push(classes.red);
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     parClasses.push(classes.bold);
   }
 
@@ -66,10 +66,10 @@ const Cockpit = (props) => {
     <div className={classes.Cockpit}>
       <h1>{props.title}</h1>
       <p className={parClasses.join(' ')}>
-        {!props.persons.length
+        {!props.personsLength
           ? 'No person'
-          : props.persons.length +
-            (props.persons.length > 1 ? ' people' : ' person')}{' '}
+          : props.personsLength +
+            (props.personsLength > 1 ? ' people' : ' person')}{' '}
         on the list!
       </p>
       <button className={buttonClass} onClick={props.clicked}>
@@ -79,4 +79,4 @@ const Cockpit = (props) => {
   );
 };
 
-export default Cockpit;
+export default React.memo(Cockpit);
