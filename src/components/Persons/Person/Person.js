@@ -2,6 +2,7 @@ import { Component } from 'react';
 import classes from './Person.module.css';
 import Aux from '../../../hoc/Aux'; //built-in React.Fragment can be used instead
 import withClass from '../../../hoc/withClass';
+import PropTypes from "prop-types";
 
 class Person extends Component {
   render() {
@@ -17,5 +18,12 @@ class Person extends Component {
     );
   }
 }
+
+Person.propTypes = {
+  clicked: PropTypes.func,
+  name: PropTypes.string,
+  age: PropTypes.number,
+  changed: PropTypes.func
+};
 
 export default withClass(Person, classes.Person);

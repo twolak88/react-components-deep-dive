@@ -1,5 +1,6 @@
 import { PureComponent } from 'react';
 import Person from './Person/Person';
+import PropTypes from "prop-types";
 
 class Persons extends PureComponent {
 
@@ -42,5 +43,19 @@ class Persons extends PureComponent {
     );
   }
 }
+
+Persons.propTypes = {
+  persons: PropTypes.arrayOf(
+    PropTypes.exact(
+      {
+        name: PropTypes.string,
+        age: PropTypes.number,
+        id: PropTypes.string
+      }
+    )
+  ),
+  clicked: PropTypes.func,
+  changed: PropTypes.func
+};
 
 export default Persons;
