@@ -1,14 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import classes from './Cockpit.module.css';
 
 const Cockpit = (props) => {
 
+  const toggleButtonRef = useRef(null);
+
   useEffect(() => {
     console.log('[Cockpit] useEffect1');
-    //Http request
-    setTimeout(() => {
-      console.log('First time rendered!');
-    }, 1000);
+    toggleButtonRef.current.click();
     return () => {
       console.log('[Cockpit] useEffect => cleanup work');
     }
@@ -72,7 +71,10 @@ const Cockpit = (props) => {
             (props.personsLength > 1 ? ' people' : ' person')}{' '}
         on the list!
       </p>
-      <button className={buttonClass} onClick={props.clicked}>
+      <button 
+        ref={toggleButtonRef}
+        className={buttonClass} 
+        onClick={props.clicked}>
         Toggle Persons
       </button>
     </div>
