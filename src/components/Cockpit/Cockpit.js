@@ -34,6 +34,18 @@ const Cockpit = (props) => {
     }
   });
 
+  useEffect(() => {
+    console.log('[Cockpit] useEffect4');
+    //Http request
+    const timer = setTimeout(() => {
+      console.log('Example with timer!');
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+      console.log('[Cockpit] useEffect => 4 cleanup work');
+    }
+  }, []);
+
   //useEffect();
 
   let parClasses = [];
