@@ -3,7 +3,8 @@ import classes from './App.module.css';
 
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
-import WithClass from '../hoc/WithClass';
+import Aux from '../hoc/Aux';
+import withClass from '../hoc/withClass';
 
 class App extends Component {
 
@@ -103,14 +104,14 @@ class App extends Component {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Aux>
         <button
           onClick={this.toggleCockpit}>Toggle cockpit</button>
         {cockpit}
         {persons}
-      </WithClass>
+      </Aux>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);
